@@ -2,9 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.persistence.entities.Patient;
 import com.example.demo.services.PatientService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,5 +18,10 @@ public class PatientController {
     @GetMapping
     public List<Patient> findAll(){
         return this.patientService.findAll();
+    }
+
+    @PostMapping
+    public Patient createPatient(@RequestBody Patient patient){
+        return this.patientService.createPatient(patient);
     }
 }
