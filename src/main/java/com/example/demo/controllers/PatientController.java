@@ -24,4 +24,10 @@ public class PatientController {
     public Patient createPatient(@RequestBody Patient patient){
         return this.patientService.createPatient(patient);
     }
+
+    @PutMapping("/tutorials/{id}")
+    public Patient updatePatient(@PathVariable("id") Long id, @RequestBody Patient patient) {
+        return this.patientService.updatePatient(id, patient);
+    }
+
 }
