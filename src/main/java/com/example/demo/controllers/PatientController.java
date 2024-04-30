@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.persistence.entities.Patient;
 import com.example.demo.services.PatientService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,12 +22,12 @@ public class PatientController {
     }
 
     @PostMapping
-    public Patient createPatient(@RequestBody Patient patient){
+    public ResponseEntity<?> createPatient(@RequestBody Patient patient){
         return this.patientService.createPatient(patient);
     }
 
-    @PutMapping("/tutorials/{id}")
-    public Patient updatePatient(@PathVariable("id") Long id, @RequestBody Patient patient) {
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updatePatient(@PathVariable("id") Long id, @RequestBody Patient patient) {
         return this.patientService.updatePatient(id, patient);
     }
 
