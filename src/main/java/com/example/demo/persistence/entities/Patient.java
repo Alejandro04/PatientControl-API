@@ -14,11 +14,8 @@ import java.util.List;
 @Table(name="patients")
 public class Patient {
     @Id
-    // If not use migrations and I created the DB manually, i need to create a sequence with the next query:
-    // CREATE SEQUENCE patients_seq
-    // With that and the @SequenceGenerator decorator, we will work without problems
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "patients_generator")
-    @SequenceGenerator(name = "patients_generator", sequenceName = "patients_seq", allocationSize = 1)
+    @SequenceGenerator(name = "patients_generator", sequenceName = "patients_id_seq", allocationSize = 1)
     private Long id;
     private String first_name;
     private String last_name;

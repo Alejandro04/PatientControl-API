@@ -16,7 +16,8 @@ import java.util.Date;
 @Table(name="patients_history")
 public class History {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "history_patients_generator")
+    @SequenceGenerator(name = "history_patients_generator", sequenceName = "history_patients_id_seq", allocationSize = 1)
     private Long id;
     private Date date;
     private String reason_consulting;
