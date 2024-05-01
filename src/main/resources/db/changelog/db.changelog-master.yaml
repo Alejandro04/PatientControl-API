@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - include:
+      file: classpath:/db/changelog/changes/001-initial-schema.sql
+  - include:
+      file: classpath:/db/changelog/changes/002-schema.sql
+  - include:
+      file: classpath:/db/changelog/changes/003-rollback.sql
+  - include:
+      file: classpath:/db/changelog/changes/004-schema.sql
