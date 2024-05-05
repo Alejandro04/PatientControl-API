@@ -20,6 +20,9 @@ public class Patient {
     private int age;
     private String phone;
 
+    /**
+     * reflextion config
+     */
     public Patient (){}
 
     public Patient(String first_name, String last_name, int age, String phone) {
