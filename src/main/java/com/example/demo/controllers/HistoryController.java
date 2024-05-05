@@ -1,21 +1,33 @@
 package com.example.demo.controllers;
 
 import com.example.demo.persistence.entities.History;
+import com.example.demo.persistence.entities.Patient;
 import com.example.demo.services.HistoryService;
+import com.example.demo.services.PatientService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
-@RequestMapping("/history")
+@RequestMapping("/v1")
 public class HistoryController {
   private final HistoryService historyService;
+  private final PatientService patientService;
 
-  public HistoryController(HistoryService historyService){
+  public HistoryController(HistoryService historyService, PatientService patientService){
       this.historyService = historyService;
+      this.patientService = patientService;
   }
 
-  @PostMapping
-  public ResponseEntity<History> createHistory(@RequestBody History history){
-    return this.historyService.createHistory(history);
+  @PostMapping("/{patientId}/history")
+  public ResponseEntity<?> createHistory(@PathVariable(value = "patientId") Long patientId, @RequestBody History history) {
+    this.patientService.findPatientById(patientId).map(patient -> {
+      history.setPatient(patient);
+      return historyService.saveHistory(history);
+    });
+
+    return new ResponseEntity<>(history, HttpStatus.CREATED);
   }
 }
