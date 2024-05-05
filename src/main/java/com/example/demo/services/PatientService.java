@@ -51,4 +51,8 @@ public class PatientService {
         Patient savedPatient = this.patientRepository.save(_patient);
         return ResponseEntity.ok(savedPatient);
     }
+
+    public Optional<Patient> findPatientById(Long id){
+        return this.patientRepository.findById(id);
+    }
 }

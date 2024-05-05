@@ -1,5 +1,6 @@
 package com.example.demo.persistence.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -11,8 +12,6 @@ import java.util.Date;
 
 @Data
 @Entity
-@Setter
-@Getter
 @Table(name="patients_history")
 public class History {
     @Id
@@ -23,8 +22,9 @@ public class History {
     private String reason_consulting;
     private String details_consulting;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "patient_id")
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "patient_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private Patient patient;
 }

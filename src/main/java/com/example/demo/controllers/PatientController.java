@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/patients")
+@RequestMapping("/v1")
 public class PatientController {
     private final PatientService patientService;
 
@@ -16,19 +16,18 @@ public class PatientController {
         this.patientService = patientService;
     }
 
-    @GetMapping
+    @GetMapping("/patients")
     public List<Patient> findAll(){
         return this.patientService.findAll();
     }
 
-    @PostMapping
+    @PostMapping("/patients")
     public ResponseEntity<?> createPatient(@RequestBody Patient patient){
         return this.patientService.createPatient(patient);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/patients/{id}")
     public ResponseEntity<?> updatePatient(@PathVariable("id") Long id, @RequestBody Patient patient) {
         return this.patientService.updatePatient(id, patient);
     }
-
 }

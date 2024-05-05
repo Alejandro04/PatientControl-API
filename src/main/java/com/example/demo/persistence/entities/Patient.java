@@ -7,8 +7,6 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Setter
-@Getter
 @Data
 @Entity
 @Table(name="patients")
@@ -22,6 +20,15 @@ public class Patient {
     private int age;
     private String phone;
 
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
-    private List<History> history;
+    /**
+     * reflextion config
+     */
+    public Patient (){}
+
+    public Patient(String first_name, String last_name, int age, String phone) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.age = age;
+        this.phone = phone;
+    }
 }
