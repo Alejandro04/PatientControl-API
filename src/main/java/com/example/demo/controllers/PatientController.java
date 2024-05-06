@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.persistence.entities.Patient;
 import com.example.demo.services.PatientService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +18,8 @@ public class PatientController {
     }
 
     @GetMapping("/patients")
-    public List<Patient> findAll(){
-        return this.patientService.findAll();
+    public Page<Patient> findAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy){
+        return this.patientService.findAll(page, size, sortBy);
     }
 
     @PostMapping("/patients")
