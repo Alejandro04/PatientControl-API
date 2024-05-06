@@ -3,6 +3,9 @@ package com.example.demo.services;
 import com.example.demo.persistence.entities.Patient;
 import com.example.demo.persistence.repositories.PatientRepository;
 import com.example.demo.utils.PatientValidation;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -18,8 +21,10 @@ public class PatientService {
         this.patientRepository = patientRepository;
     }
 
-    public List<Patient> findAll(){
-        return new ResponseEntity<>(this.patientRepository.findAll(), HttpStatus.OK).getBody();
+    public Page<Patient> findAll(int page, int size, String sortBy){
+        Sort sort = Sort.by(sortBy).ascending();
+        PageRequest pageRequest = PageRequest.of(page, size, sort);
+        return this.patientRepository.findAll(pageRequest);
     }
 
     public ResponseEntity<?> createPatient(Patient patient){
