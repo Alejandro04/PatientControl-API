@@ -22,6 +22,15 @@ public class PatientController {
         return this.patientService.findAll(page, size, sortBy);
     }
 
+    @GetMapping("/patients/filter")
+    public Page<Patient> findPatientsByFilter(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam String filterCriteria) {
+        return patientService.findPatientsByFilter(page, size, sortBy, filterCriteria);
+    }
+
     @PostMapping("/patients")
     public ResponseEntity<?> createPatient(@RequestBody Patient patient){
         return this.patientService.createPatient(patient);
