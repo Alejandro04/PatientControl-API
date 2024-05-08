@@ -5,12 +5,12 @@ import com.example.demo.persistence.repositories.PatientRepository;
 import com.example.demo.utils.PatientValidation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,6 +25,11 @@ public class PatientService {
         Sort sort = Sort.by(sortBy).ascending();
         PageRequest pageRequest = PageRequest.of(page, size, sort);
         return this.patientRepository.findAll(pageRequest);
+    }
+
+    public Page<Patient> findPatientsByFilter(int page, int size, String sortBy, String filterCriteria) {
+        Pageable pageable = PageRequest.of(page, size);
+        return patientRepository.findByCustomCriteria(filterCriteria, pageable);
     }
 
     public ResponseEntity<?> createPatient(Patient patient){
