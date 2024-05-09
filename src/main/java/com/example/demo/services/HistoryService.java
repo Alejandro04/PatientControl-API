@@ -23,7 +23,7 @@ public class HistoryService {
         return this.historyRepository.save(history);
    }
 
-    public Page<History> findHistoryByFilter(int page, int size, String sortBy, Long patientId) {
+    public Page<History> findHistoryByPatientId(int page, int size, String sortBy, Long patientId) {
         Pageable pageable = PageRequest.of(page, size);
         return historyRepository.findByPatientId(patientId, pageable);
     }

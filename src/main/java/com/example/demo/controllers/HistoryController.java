@@ -28,7 +28,7 @@ public class HistoryController {
           @RequestParam(defaultValue = "10") int size,
           @RequestParam(defaultValue = "id") String sortBy,
           @PathVariable(value = "patientId") Long patientId) {
-    return historyService.findHistoryByFilter(page, size, sortBy, patientId);
+    return historyService.findHistoryByPatientId(page, size, sortBy, patientId);
   }
 
   @PostMapping("/{patientId}/history")

@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 public interface HistoryRepository extends JpaRepository <History, Long> {
-    @Query("SELECT h FROM History h WHERE h.patient = :patientId")
+    @Query("SELECT h FROM History h WHERE h.patient.id = :patientId")
     Page<History> findByPatientId(Long patientId, Pageable pageable);
 }
