@@ -4,6 +4,7 @@ import com.example.demo.persistence.entities.History;
 import com.example.demo.persistence.entities.Patient;
 import com.example.demo.services.HistoryService;
 import com.example.demo.services.PatientService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,15 @@ public class HistoryController {
   public HistoryController(HistoryService historyService, PatientService patientService){
       this.historyService = historyService;
       this.patientService = patientService;
+  }
+
+  @GetMapping("/{patientId}/history")
+  public Page<History> findPatientsByFilter(
+          @RequestParam(defaultValue = "0") int page,
+          @RequestParam(defaultValue = "10") int size,
+          @RequestParam(defaultValue = "id") String sortBy,
+          @PathVariable(value = "patientId") Long patientId) {
+    return historyService.findHistoryByFilter(page, size, sortBy, patientId);
   }
 
   @PostMapping("/{patientId}/history")
