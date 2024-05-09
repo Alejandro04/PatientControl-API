@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1")
@@ -29,6 +29,11 @@ public class PatientController {
             @RequestParam(defaultValue = "id") String sortBy,
             @RequestParam String filterCriteria) {
         return patientService.findPatientsByFilter(page, size, sortBy, filterCriteria);
+    }
+
+    @GetMapping("/patient/{id}")
+    public Optional<Patient> findById(@PathVariable(value = "id") Long id){
+        return this.patientService.findById(id);
     }
 
     @PostMapping("/patients")
