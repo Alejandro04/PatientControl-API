@@ -27,6 +27,10 @@ public class PatientService {
         return this.patientRepository.findAll(pageRequest);
     }
 
+    public Optional<Patient> findById(Long id){
+        return this.patientRepository.findById(id);
+    }
+
     public Page<Patient> findPatientsByFilter(int page, int size, String sortBy, String filterCriteria) {
         Pageable pageable = PageRequest.of(page, size);
         return patientRepository.findByCustomCriteria(filterCriteria, pageable);
