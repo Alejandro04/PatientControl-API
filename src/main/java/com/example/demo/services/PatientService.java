@@ -37,6 +37,7 @@ public class PatientService {
     }
 
     public ResponseEntity<?> createPatient(Patient patient){
+
         if(!PatientValidation.isValidPatient(patient)){
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
