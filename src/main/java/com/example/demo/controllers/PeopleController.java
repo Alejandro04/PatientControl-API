@@ -50,7 +50,7 @@ public class PeopleController {
                 lastName = nameParts[1];
             }
 
-            Patient patient = new Patient();
+            Patient patient = new Patient("John Doe");
             patient.setFirst_name(firstName);
             patient.setLast_name(lastName);
             patient.setPhone(phone);
