@@ -16,11 +16,6 @@ public class Patient {
     private int age;
     private String phone;
 
-    /**
-     * reflextion config
-     */
-    public Patient (String johnDoe){}
-
     public Patient() {
         this.first_name = first_name;
         this.last_name = last_name;

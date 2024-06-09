@@ -40,8 +40,8 @@ public class PatientServiceTest {
         String sortBy = "name";
 
         List<Patient> patientList = new ArrayList<>();
-        patientList.add(new Patient("John Doe"));
-        patientList.add(new Patient("Jane Doe"));
+        patientList.add(new Patient());
+        patientList.add(new Patient());
 
         PageRequest pageRequest = PageRequest.of(page, size, Sort.by(sortBy).ascending());
         Page<Patient> expectedPage = new PageImpl<>(patientList, pageRequest, patientList.size());
