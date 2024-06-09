@@ -2,10 +2,6 @@ package com.example.demo.persistence.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
-import java.util.List;
 
 @Data
 @Entity
@@ -20,12 +16,7 @@ public class Patient {
     private int age;
     private String phone;
 
-    /**
-     * reflextion config
-     */
-    public Patient (){}
-
-    public Patient(String first_name, String last_name, int age, String phone) {
+    public Patient() {
         this.first_name = first_name;
         this.last_name = last_name;
         this.age = age;
