@@ -38,8 +38,8 @@ jobs:
           context: .
           push: true
           tags: |
-            alejodev04/patientApi:latest
-            alejodev04/patientApi:${{ github.sha }}
+            alejodev04/patientapi:latest
+            alejodev04/patientapi:${{ github.sha }}
 
       # Run Docker Compose to spin up PostgreSQL and Keycloak along with the app
       - name: Run Docker Compose
