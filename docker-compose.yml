@@ -1,0 +1,45 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: patientscontrolwithliquibase3
+      POSTGRES_USER: alejo
+      POSTGRES_PASSWORD: 123456
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+  keycloak:
+    image: jboss/keycloak:17.0.1
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+
+  springboot-app:
+    build: .
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/patientscontrolwithliquibase3
+      SPRING_DATASOURCE_USERNAME: alejo
+      SPRING_DATASOURCE_PASSWORD: 123456
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      KEYCLOAK_HOST: http://keycloak:8080/auth
+      KEYCLOAK_CLIENTE_REGISTRAR: cliente-registrar
+      KEYCLOAK_REALM: apipatients
+      KEYCLOAK_REGISTRO_CLIENT_SECRET: some-secret-value
+    ports:
+      - "8081:8081"
+    depends_on:
+      - postgres
+      - keycloak
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
