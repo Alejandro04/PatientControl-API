@@ -12,10 +12,11 @@ services:
       - app-network
 
   keycloak:
-    image: jboss/keycloak:17.0.1
+    image: quay.io/keycloak/keycloak:17.0.1
     environment:
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: admin
+      DB_VENDOR: POSTGRES
     ports:
       - "8080:8080"
     networks:
