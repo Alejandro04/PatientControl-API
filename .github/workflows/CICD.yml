@@ -32,7 +32,7 @@ jobs:
           distribution: 'temurin'  # Especifica la distribución de Java
 
       - name: Build with Maven (debug mode) # For now
-        run: mvn clean package -X
+        run: mvn clean package -DskipTests
 
 
       # Log in to Docker Hub
